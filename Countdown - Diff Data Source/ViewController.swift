@@ -33,6 +33,12 @@ class ViewController: UIViewController {
         configureTableView()
         // DispatchQueue.main.asyncAfter(deadline: .now() + 1) {self.configureDataSource()}
         configureDataSource()
+        configureNavBar()
+    }
+    
+    private func configureNavBar() {
+        navigationItem.title = "Countdown with diffable datasource"
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(startCountDown))
     }
 
     private func configureTableView() {
@@ -50,7 +56,7 @@ class ViewController: UIViewController {
             
             if value == -1 {
                 cell.textLabel?.text = "App launched 😅"  // value is Int (Section, Int)
-                cell.textLabel?.numberOfLines = 0 
+                cell.textLabel?.numberOfLines = 0
             } else {
                 cell.textLabel?.text = "\(value)"  // value is Int (Section, Int)
             }
@@ -73,6 +79,7 @@ class ViewController: UIViewController {
         startCountDown()
     }
 
+    @objc
     private func startCountDown() {
         if timer != nil {
             timer.invalidate()
